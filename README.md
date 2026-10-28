@@ -1,17 +1,18 @@
 <div align="center">
 
-<!-- Typing SVG Header -->
+<!-- Hero Banner (Stored in ./assets/header.svg) -->
 <a href="https://devankable.framer.website">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=58A6FF&center=true&vCenter=true&width=550&lines=Devank+Gupta;Creative+and+Scientific;Building+Agentic+Workspaces+%26+Local+AI;Whisper+%7C+Multi-Agent+Systems+%7C+TypeScript" alt="Devank Gupta - Creative & Scientific" />
+  <img src="./assets/header.svg" width="100%" alt="Devank Gupta - Systems, Agents & Craft" />
 </a>
 
-<p align="center">
-  <em>Systems thinker & creative engineer exploring intelligent interfaces, local intelligence, and digital craft.</em>
-</p>
+<br/>
+
+> *"No matter where you go, everyone's always connected."* &mdash; Bridging rigorous systems engineering with humanistic craft, philosophy, and poetry.
 
 <p align="center">
-  <a href="https://devankable.framer.website"><img src="https://img.shields.io/badge/Writing-devankable.framer.website-21262d?style=for-the-badge&logo=framer&logoColor=58a6ff" alt="Writing" /></a>
-  <a href="https://github.com/notdevank"><img src="https://img.shields.io/badge/GitHub-PRO-21262d?style=for-the-badge&logo=github&logoColor=bc8cff" alt="GitHub PRO" /></a>
+  <a href="https://devankable.framer.website"><img src="https://img.shields.io/badge/Writing-devankable.framer.website-0d1117?style=flat-square&logo=framer&logoColor=58a6ff" alt="Writing" /></a>
+  <a href="https://github.com/notdevank"><img src="https://img.shields.io/badge/GitHub-PRO-0d1117?style=flat-square&logo=github&logoColor=bc8cff" alt="GitHub PRO" /></a>
+  <a href="https://github.com/notdevank?tab=repositories"><img src="https://img.shields.io/badge/Repositories-10-0d1117?style=flat-square&logo=git&logoColor=3fb950" alt="Repositories" /></a>
 </p>
 
 </div>
@@ -21,63 +22,57 @@
 ### `> whoami`
 
 ```bash
-devank@wired:~$ cat identity.json
+devank@wired:~$ cat profile.json
 {
   "name": "Devank Gupta",
   "alias": "notdevank",
-  "focus": [
-    "Agentic Workspaces & Multi-Agent Systems",
-    "Local-First & Privacy-Centric Voice Dictation",
-    "Creative & Scientific Writing"
+  "base": "India // The Wired",
+  "domains": [
+    "Autonomous Agentic Workspaces",
+    "Local-First Speech & Audio ML",
+    "Systems Architecture & Tooling"
   ],
-  "current_endeavors": [
-    "Engineering autonomous workspaces (Obsidialith)",
-    "Sub-millisecond local speech interfaces (faster-whisper)"
-  ],
-  "philosophy": "Interweaving rigorous systems engineering with humanistic craft."
+  "craft": "Creative & Scientific Writing"
 }
 ```
 
 ---
 
-### ⚡ Selected Systems & Experiments
+### ⚡ Selected Systems & Engineering
 
 | Project | Description | Stack | Status |
 | :--- | :--- | :--- | :--- |
-| [**Obsidialith**](https://github.com/notdevank/Obsidialith) | Multi-agent system turning Obsidian into an intelligent, autonomous workspace | `Python` `Multi-Agent` `Obsidian` | ![Active](https://img.shields.io/badge/Active-3fb950?style=flat-square) |
-| [**opencode-voice-mode-plugin**](https://github.com/notdevank/opencode-voice-mode-plugin) | Privacy-first, local voice dictation plugin for OpenCode using `faster-whisper` | `TypeScript` `faster-whisper` `Voice` | ![Active](https://img.shields.io/badge/Active-3fb950?style=flat-square) |
-| [**mailflare**](https://github.com/notdevank/mailflare) | Cloudflare-native email workflow & automation engine | `TypeScript` `Workers` `Serverless` | ![Active](https://img.shields.io/badge/Active-3fb950?style=flat-square) |
-| [**Mosaic**](https://github.com/notdevank/Mosaic) | Modular systems architecture for extensible workflows | `TypeScript` `Architecture` | ![WIP](https://img.shields.io/badge/WIP-bc8cff?style=flat-square) |
-| [**ariaos**](https://github.com/notdevank/ariaos) | Experimental environment & OS-level workspace interactions | `TypeScript` `Systems` | ![Exploratory](https://img.shields.io/badge/Exploratory-58a6ff?style=flat-square) |
+| [**Obsidialith**](https://github.com/notdevank/Obsidialith) | Multi-agent architecture transforming Obsidian into an autonomous workspace for knowledge, tasks, and synthesis. | `Python` `Multi-Agent` `Obsidian` | `Active` |
+| [**opencode-voice-mode-plugin**](https://github.com/notdevank/opencode-voice-mode-plugin) | Privacy-first local voice dictation engine for OpenCode powered by `faster-whisper` for sub-millisecond transcription. | `TypeScript` `faster-whisper` `Audio` | `Active` |
+| [**mailflare**](https://github.com/notdevank/mailflare) | Cloudflare-native email workflow automation engine running on serverless edge workers. | `TypeScript` `Cloudflare Workers` `Edge` | `Production` |
+| [**Mosaic**](https://github.com/notdevank/Mosaic) | Modular workspace systems architecture and extensible development primitives. | `TypeScript` `Architecture` | `WIP` |
+| [**ariaos**](https://github.com/notdevank/ariaos) | Exploratory OS-level workspace interactions and web runtime experiments. | `TypeScript` `Systems` `Runtime` | `Exploratory` |
+| [**OpenTerminal**](https://github.com/notdevank/OpenTerminal) | Minimalist terminal tooling and environment utilities for modern developer workflows. | `TypeScript` `CLI` `Shell` | `Active` |
 
 ---
 
-### 🛠️ Arsenal & Tooling
+### 🛠️ Arsenal & Stack
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=ts,js,python,nodejs,react,cloudflare,git,linux,bash,docker&theme=dark" alt="Devank Tech Stack" />
-</p>
-
-<details>
-<summary><b>System Capabilities & Stack Breakdown</b></summary>
-<br />
-
-- **Languages:** TypeScript, JavaScript, Python, Bash / Shell
-- **AI & Intelligent Systems:** Multi-Agent Orchestration, `faster-whisper`, Local LLM Tooling, Autonomous Workflows
-- **Cloud & Edge:** Cloudflare Workers, Serverless, Docker
-- **Environments:** Linux, Obsidian Ecosystem, OpenCode, Git Architecture
-
-</details>
+```
+AI / Voice / Agents   ::  faster-whisper • Multi-Agent Loops • Local Inference • Autonomous Runtimes
+Languages & Runtimes  ::  TypeScript • Python • JavaScript • Bash • Node.js
+Cloud & Tooling       ::  Cloudflare Workers • Linux / Wayland • Docker • Git • Obsidian Ecosystem
+```
 
 ---
 
-### 📝 Creative & Scientific (Writings)
+### 📝 Creative & Scientific (Essays & Poetry)
 
-Beyond engineering, I write about technology, creative entrepreneurship, and human thought at [**devankable.framer.website**](https://devankable.framer.website):
+Engineering provides structure; writing provides meaning. Selected pieces from [**devankable.framer.website**](https://devankable.framer.website):
 
-- 📜 *Treason* & *Echo Fall* (Poetry)
-- 💡 *The Godly Service* & *The Environmaties*
-- 🔍 *Unpaid internships decreasing our value?* (Tech & Culture)
+#### Inquiries & Technology
+- [**Unpaid internships decreasing our value?**](https://devankable.framer.website/articles/unpaid-internships-decreasing-our-value) — *An examination of early career dynamics and the devaluation of developer labor.*
+- [**The Godly Service**](https://devankable.framer.website/articles/the-godly-service) — *Reflections on devotion, craft, and creation.*
+- [**The Environmaties**](https://devankable.framer.website/articles/the-environmaties) — *Interrogating ecological and digital ecosystems.*
+
+#### Poetries
+- [**Treason**](https://devankable.framer.website/articles/treason) — *Fractured loyalties and inner silence.*
+- [**Echo Fall**](https://devankable.framer.website/articles/echo-fall) — *Resonance across the void.*
 
 ---
 
@@ -93,5 +88,5 @@ Beyond engineering, I write about technology, creative entrepreneurship, and hum
 ---
 
 <div align="center">
-  <sub>Configured with care &bull; Wired to the matrix &bull; <i>"No matter where you go, everyone's always connected."</i></sub>
+  <sub>Configured with care &bull; Wired to the matrix &bull; Devank Gupta (<code>notdevank</code>)</sub>
 </div>
