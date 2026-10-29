@@ -1,92 +1,108 @@
 <div align="center">
 
-<!-- Hero Banner (Stored in ./assets/header.svg) -->
-<a href="https://devankable.framer.website">
-  <img src="./assets/header.svg" width="100%" alt="Devank Gupta - Systems, Agents & Craft" />
-</a>
+# DEVANK GUPTA
+
+### Engineer by education. Builder by instinct.
+
+I build intelligent systems, experiment with emerging technologies,  
+and explore the space between engineering, software, and design.
 
 <br/>
 
-> *"No matter where you go, everyone's always connected."* &mdash; Bridging rigorous systems engineering with humanistic craft, philosophy, and poetry.
+[GitHub](https://github.com/notdevank) · [Portfolio](https://infocial.cc)
 
-<p align="center">
-  <a href="https://devankable.framer.website"><img src="https://img.shields.io/badge/Writing-devankable.framer.website-0d1117?style=flat-square&logo=framer&logoColor=58a6ff" alt="Writing" /></a>
-  <a href="https://github.com/notdevank"><img src="https://img.shields.io/badge/GitHub-PRO-0d1117?style=flat-square&logo=github&logoColor=bc8cff" alt="GitHub PRO" /></a>
-  <a href="https://github.com/notdevank?tab=repositories"><img src="https://img.shields.io/badge/Repositories-10-0d1117?style=flat-square&logo=git&logoColor=3fb950" alt="Repositories" /></a>
-</p>
+<br/>
+
+![Profile Views](https://komarev.com/ghpvc/?username=notdevank&style=flat&color=161616&label=PROFILE+VIEWS)
 
 </div>
 
 ---
 
-### `> whoami`
+### `01` — ABOUT
 
-```bash
-devank@wired:~$ cat profile.json
-{
-  "name": "Devank Gupta",
-  "alias": "notdevank",
-  "base": "India // The Wired",
-  "domains": [
-    "Autonomous Agentic Workspaces",
-    "Local-First Speech & Audio ML",
-    "Systems Architecture & Tooling"
-  ],
-  "craft": "Creative & Scientific Writing"
-}
+I'm a mechanical engineering student interested in how intelligent systems work, how software shapes the world, and how good design makes technology feel effortless.
+
+My work moves across disciplines:
+
+- **AI & Agents** — experimenting with LLMs, agentic workflows, and intelligent automation.
+- **Software & Systems** — building tools, exploring local AI, and understanding the infrastructure behind applications.
+- **Product & Design** — translating ideas into intuitive interfaces and meaningful digital experiences.
+- **Engineering** — exploring the intersection of mechanical systems, embedded hardware, and computation.
+
+I enjoy going beyond using technology to understanding how it works — and building my own versions of it.
+
+### `02` — CURRENT INTERESTS
+
+```text
+Artificial Intelligence  →  Agents, LLMs, automation
+Systems Engineering      →  Architecture, tooling, Linux
+Creative Technology      →  Product design, interfaces, experimentation
+Mechanical Engineering   →  Hardware, control systems, applied research
 ```
 
----
+### `03` — SELECTED PROJECTS
 
-### ⚡ Selected Systems & Engineering
+**Obsidialith**  
+Exploring personal knowledge systems, Obsidian, and agentic workflows.
 
-| Project | Description | Stack | Status |
-| :--- | :--- | :--- | :--- |
-| [**Obsidialith**](https://github.com/notdevank/Obsidialith) | Multi-agent architecture transforming Obsidian into an autonomous workspace for knowledge, tasks, and synthesis. | `Python` `Multi-Agent` `Obsidian` | `Active` |
-| [**opencode-voice-mode-plugin**](https://github.com/notdevank/opencode-voice-mode-plugin) | Privacy-first local voice dictation engine for OpenCode powered by `faster-whisper` for sub-millisecond transcription. | `TypeScript` `faster-whisper` `Audio` | `Active` |
-| [**mailflare**](https://github.com/notdevank/mailflare) | Cloudflare-native email workflow automation engine running on serverless edge workers. | `TypeScript` `Cloudflare Workers` `Edge` | `Production` |
-| [**Mosaic**](https://github.com/notdevank/Mosaic) | Modular workspace systems architecture and extensible development primitives. | `TypeScript` `Architecture` | `WIP` |
-| [**ariaos**](https://github.com/notdevank/ariaos) | Exploratory OS-level workspace interactions and web runtime experiments. | `TypeScript` `Systems` `Runtime` | `Exploratory` |
-| [**OpenTerminal**](https://github.com/notdevank/OpenTerminal) | Minimalist terminal tooling and environment utilities for modern developer workflows. | `TypeScript` `CLI` `Shell` | `Active` |
+→ [Explore repository](https://github.com/notdevank/Obsidialith)
 
----
+**Infocial**  
+A creative venture exploring branding, digital experiences, and design.
 
-### 🛠️ Arsenal & Stack
+→ [Visit Infocial](https://infocial.cc)
 
-```
-AI / Voice / Agents   ::  faster-whisper • Multi-Agent Loops • Local Inference • Autonomous Runtimes
-Languages & Runtimes  ::  TypeScript • Python • JavaScript • Bash • Node.js
-Cloud & Tooling       ::  Cloudflare Workers • Linux / Wayland • Docker • Git • Obsidian Ecosystem
-```
+**Kineton**  
+Working on product design and the user experience of a SaaS platform focused on chip manufacturing optimization.
 
----
+**Engineering Experiments**  
+Exploring embedded systems, motor control, sensor measurements, and the application of software to physical systems.
 
-### 📝 Creative & Scientific (Essays & Poetry)
+*More experiments, prototypes, and projects are in progress.*
 
-Engineering provides structure; writing provides meaning. Selected pieces from [**devankable.framer.website**](https://devankable.framer.website):
+### `04` — TECHNOLOGY
 
-#### Inquiries & Technology
-- [**Unpaid internships decreasing our value?**](https://devankable.framer.website/articles/unpaid-internships-decreasing-our-value) — *An examination of early career dynamics and the devaluation of developer labor.*
-- [**The Godly Service**](https://devankable.framer.website/articles/the-godly-service) — *Reflections on devotion, craft, and creation.*
-- [**The Environmaties**](https://devankable.framer.website/articles/the-environmaties) — *Interrogating ecological and digital ecosystems.*
+**AI & Automation**
 
-#### Poetries
-- [**Treason**](https://devankable.framer.website/articles/treason) — *Fractured loyalties and inner silence.*
-- [**Echo Fall**](https://devankable.framer.website/articles/echo-fall) — *Resonance across the void.*
+LLMs · AI Agents · Local Inference · Workflow Automation
 
----
+**Development**
 
-### 📊 Telemetry
+Python · JavaScript · Git · Linux · APIs
+
+**Design**
+
+Figma · UI/UX · Product Design · Branding
+
+**Engineering**
+
+Embedded Systems · Control Systems · Mechanical Design
+
+### `05` — GITHUB ACTIVITY
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=notdevank&show_icons=true&theme=tokyonight&bg_color=0d1117&hide_border=true&title_color=58a6ff&text_color=c9d1d9&icon_color=79c0ff" height="150" alt="GitHub Stats" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=notdevank&layout=compact&theme=tokyonight&bg_color=0d1117&hide_border=true&title_color=58a6ff&text_color=c9d1d9" height="150" alt="Top Languages" />
+<img height="165" src="https://github-readme-stats.vercel.app/api?username=notdevank&show_icons=true&hide_border=true&theme=transparent&rank_icon=github" alt="GitHub statistics"/>
+
+<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=notdevank&layout=compact&hide_border=true&theme=transparent" alt="Most used languages"/>
 
 </div>
 
+### `06` — BEYOND THE CODE
+
+I enjoy exploring ideas, reading, writing, designing, and questioning how things work.
+
+I'm especially interested in projects that combine multiple disciplines rather than stay within the boundaries of one.
+
+I believe the best way to understand a system is to build one.
+
 ---
 
 <div align="center">
-  <sub>Configured with care &bull; Wired to the matrix &bull; Devank Gupta (<code>notdevank</code>)</sub>
+
+**Curiosity → Experiments → Systems → Something useful.**
+
+*Always learning. Always building.*
+
 </div>
