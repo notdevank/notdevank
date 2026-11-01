@@ -1,8 +1,14 @@
 <div align="center">
-<img src="assets/banner.svg" width="100%" alt="Devank Gupta, a halftone specimen sheet"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/banner.svg">
+  <img src="assets/light/banner.svg" alt="Devank Gupta, a halftone specimen sheet" width="100%">
+</picture>
 </div>
 
-<img src="assets/sec-about.svg" width="100%" alt="01 About"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sec-about.svg">
+  <img src="assets/light/sec-about.svg" alt="01 About" width="100%">
+</picture>
 
 I build local-first software and agent tooling. The work keeps its data in files you own, and most of it runs without an account.
 
@@ -12,7 +18,10 @@ Right now that means desktop apps with local storage, and agents that plug into 
 - Reading up on MCP servers and local inference
 - Happy to talk about local-first architecture, Tauri, or MediaPipe hand tracking
 
-<img src="assets/sec-stack.svg" width="100%" alt="02 Stack"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sec-stack.svg">
+  <img src="assets/light/sec-stack.svg" alt="02 Stack" width="100%">
+</picture>
 
 | FIELD | SPEC |
 | :-- | :-- |
@@ -21,13 +30,22 @@ Right now that means desktop apps with local storage, and agents that plug into 
 | `AI` | MediaPipe · faster-whisper · MCP · Gemini |
 | `TOOLS` | Git · Linux · Obsidian · Figma |
 
-<img src="assets/sec-telemetry.svg" width="100%" alt="03 Telemetry"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sec-telemetry.svg">
+  <img src="assets/light/sec-telemetry.svg" alt="03 Telemetry" width="100%">
+</picture>
 
 <div align="center">
-<img src="assets/stats.svg" width="100%" alt="Repositories, stars, followers and language split"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/stats.svg">
+  <img src="assets/light/stats.svg" alt="Repositories, stars, followers and language split" width="100%">
+</picture>
 </div>
 
-<img src="assets/sec-contact.svg" width="100%" alt="04 Contact"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sec-contact.svg">
+  <img src="assets/light/sec-contact.svg" alt="04 Contact" width="100%">
+</picture>
 
 <div align="center">
 
@@ -39,4 +57,7 @@ Right now that means desktop apps with local storage, and agents that plug into 
 
 </div>
 
-<img src="assets/colophon.svg" width="100%" alt="Colophon"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/colophon.svg">
+  <img src="assets/light/colophon.svg" alt="Colophon" width="100%">
+</picture>

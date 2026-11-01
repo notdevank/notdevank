@@ -23,11 +23,40 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets"
 
-PAPER = "#0B0908"
-INK = "#F2ECE1"
-ACCENT = "#FF4A2A"
-MUTED = "#9C9284"
-HAIRLINE = "#332D26"
+PALETTES = {
+    "dark": {
+        "paper": "#0B0908",
+        "ink": "#F2ECE1",
+        "accent": "#FF4A2A",
+        "muted": "#9C9284",
+        "hairline": "#332D26",
+    },
+    "light": {
+        "paper": "#EDE7DA",
+        "ink": "#17130F",
+        "accent": "#D63A1E",
+        "muted": "#6E6557",
+        "hairline": "#C9BFAC",
+    },
+}
+
+PAPER = PALETTES["dark"]["paper"]
+INK = PALETTES["dark"]["ink"]
+ACCENT = PALETTES["dark"]["accent"]
+MUTED = PALETTES["dark"]["muted"]
+HAIRLINE = PALETTES["dark"]["hairline"]
+
+OUT_DIR = ASSETS
+
+
+def use_theme(theme: str) -> None:
+    """Swap the palette and the output folder."""
+    global PAPER, INK, ACCENT, MUTED, HAIRLINE, OUT_DIR
+    palette = PALETTES[theme]
+    PAPER, INK, ACCENT = palette["paper"], palette["ink"], palette["accent"]
+    MUTED, HAIRLINE = palette["muted"], palette["hairline"]
+    OUT_DIR = ASSETS if theme == "dark" else ASSETS / theme
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 def resolve_font(candidates: list[str]) -> str:
     for path in candidates:
@@ -211,7 +240,7 @@ def svg_open(width: int, height: int, background: str | None) -> list[str]:
 
 def write_svg(name: str, parts: list[str]) -> Path:
     parts.append("</svg>")
-    path = ASSETS / name
+    path = OUT_DIR / name
     path.write_text("".join(parts))
     return path
 
@@ -356,7 +385,6 @@ def build_colophon() -> Path:
 
 
 def build_all() -> None:
-    ASSETS.mkdir(exist_ok=True)
     written = [
         build_banner(),
         build_section("01", "ABOUT", "sec-about.svg"),
@@ -375,17 +403,23 @@ def build_all() -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("target", nargs="?", default="all")
+    parser.add_argument("--theme", choices=["dark", "light", "both"], default="both")
     args = parser.parse_args()
 
     ASSETS.mkdir(exist_ok=True)
-    if args.target == "all":
-        build_all()
-    elif args.target == "banner":
-        print(build_banner())
-    elif args.target == "stats":
-        print(build_stats())
-    else:
-        parser.error(f"unknown target {args.target!r}")
+    themes = ["dark", "light"] if args.theme == "both" else [args.theme]
+
+    for theme in themes:
+        use_theme(theme)
+        print(f"[{theme}]", end=" ")
+        if args.target == "all":
+            build_all()
+        elif args.target == "banner":
+            print(build_banner())
+        elif args.target == "stats":
+            print(build_stats())
+        else:
+            parser.error(f"unknown target {args.target!r}")
 
 
 if __name__ == "__main__":
