@@ -1,0 +1,17 @@
+{
+  "user": "notdevank",
+  "repos": 11,
+  "stars": 12,
+  "followers": 11,
+  "languages": [
+    {
+      "name": "TypeScript",
+      "percent": 83
+    },
+    {
+      "name": "Python",
+      "percent": 17
+    }
+  ],
+  "updated": "2026-11-01"
+}

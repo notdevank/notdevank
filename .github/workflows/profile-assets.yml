@@ -1,0 +1,52 @@
+name: Refresh profile assets
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+  push:
+    paths:
+      - "scripts/**"
+      - ".github/workflows/profile-assets.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install fonts and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-dejavu
+          python -m pip install --quiet pillow numpy
+          test -f /usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf
+
+      - name: Verify fonts used by the generator
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from scripts.halftone import SANS_BOLD
+          print("using", SANS_BOLD)
+          assert Path(SANS_BOLD).exists()
+          PY
+
+      - name: Refresh stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/fetch_stats.py
+
+      - name: Redraw assets
+        run: python scripts/halftone.py all
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: refresh profile assets"
+          file_pattern: "assets/**"
