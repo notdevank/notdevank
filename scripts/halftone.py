@@ -65,6 +65,11 @@ def resolve_font(candidates: list[str]) -> str:
     raise FileNotFoundError("none of these fonts exist: " + ", ".join(candidates))
 
 
+SERIF_BOLD = resolve_font([
+    "/usr/share/fonts/TTF/DejaVuSerifCondensed-Bold.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSerifCondensed-Bold.ttf",
+    "/usr/share/fonts/dejavu/DejaVuSerifCondensed-Bold.ttf",
+])
 SANS_BOLD = resolve_font([
     "/usr/share/fonts/TTF/DejaVuSansCondensed-Bold.ttf",
     "/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf",
@@ -258,16 +263,16 @@ def build_banner() -> Path:
     parts.append(bitmap_svg_right("MMXXVI", 3, width - 64, 40, MUTED))
 
     for index, line in enumerate(("DEVANK", "GUPTA")):
-        cell = 9
-        grid = downsample(text_mask(line, SANS_BOLD, 170, tracking=3), cell)
-        y = 96 + index * 122
+        cell = 6
+        grid = downsample(text_mask(line, SERIF_BOLD, 150, tracking=2), cell)
+        y = 104 + index * 152
         parts.append(
-            f'<g fill="{ACCENT}" opacity="0.78">'
-            f'{dots(grid, cell, 73, y + 7, 4.6, gamma=1.25, floor=0.1)}</g>'
+            f'<g fill="{ACCENT}" opacity="0.7">'
+            f'{dots(grid, cell, 72, y + 5, 3.4, gamma=1.15, floor=0.12)}</g>'
         )
-        parts.append(f'<g fill="{INK}">{dots(grid, cell, 68, y, 4.6, gamma=1.25, floor=0.1)}</g>')
+        parts.append(f'<g fill="{INK}">{dots(grid, cell, 68, y, 3.4, gamma=1.15, floor=0.12)}</g>')
 
-    parts.append(bitmap_svg("LOCAL-FIRST SOFTWARE / AGENTIC TOOLING", 3, 68, 378, INK))
+    parts.append(bitmap_svg("LOCAL-FIRST SOFTWARE / AGENTIC TOOLING", 3, 68, 400, INK))
 
     parts.append(f'<line x1="900" y1="96" x2="900" y2="392" stroke="{HAIRLINE}" stroke-width="1"/>')
     for tick in range(0, 297, 24):
@@ -287,10 +292,10 @@ def build_banner() -> Path:
         f'stroke-dasharray="2 8" opacity="0.55"/>'
     )
 
-    parts.append(f'<line x1="64" y1="430" x2="1000" y2="430" stroke="{HAIRLINE}" stroke-width="1"/>')
+    parts.append(f'<line x1="64" y1="444" x2="1000" y2="444" stroke="{HAIRLINE}" stroke-width="1"/>')
     for x in range(64, 999, 44):
-        parts.append(f'<line x1="{x}" y1="430" x2="{x}" y2="438" stroke="{HAIRLINE}" stroke-width="1"/>')
-    parts.append(bitmap_svg("HALFTONE / DOT MATRIX", 2, 64, 452, MUTED))
+        parts.append(f'<line x1="{x}" y1="444" x2="{x}" y2="452" stroke="{HAIRLINE}" stroke-width="1"/>')
+    parts.append(bitmap_svg("HALFTONE / DOT MATRIX", 2, 64, 466, MUTED))
 
     return write_svg("banner.svg", parts)
 
@@ -379,7 +384,7 @@ def build_colophon() -> Path:
         parts.append(f'<circle cx="{52 + index * 26}" cy="88" r="8" fill="{color}"/>')
     parts.append(bitmap_svg("PALETTE", 2, 40, 104, MUTED))
 
-    parts.append(bitmap_svg("DEJAVU SANS CONDENSED / 5X7 DOT MATRIX / TWO INKS", 3, 200, 80, INK))
+    parts.append(bitmap_svg("DEJAVU SERIF CONDENSED / 5X7 DOT MATRIX / TWO INKS", 3, 200, 80, INK))
 
     return write_svg("colophon.svg", parts)
 

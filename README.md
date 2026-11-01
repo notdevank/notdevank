@@ -25,10 +25,13 @@ Right now that means desktop apps with local storage, and agents that plug into 
 
 | FIELD | SPEC |
 | :-- | :-- |
-| `APPS` | Tauri · React · Next.js · Three.js · Tailwind |
-| `SYSTEMS` | Node.js · Express · Python · Docker · GitHub Actions |
+| `LANGUAGES` | TypeScript · Python · JavaScript |
+| `FRONTEND` | React · Next.js · Tailwind · Three.js |
+| `DESKTOP` | Tauri · SQLite · IndexedDB |
+| `BACKEND` | Node.js · Express · REST APIs |
 | `AI` | MediaPipe · faster-whisper · MCP · Gemini |
-| `TOOLS` | Git · Linux · Obsidian · Figma |
+| `INFRA` | Docker · GitHub Actions · Linux |
+| `TOOLS` | Git · Obsidian · Figma · VS Code |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/sec-telemetry.svg">
