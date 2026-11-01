@@ -23,11 +23,11 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets"
 
-PAPER = "#EDE7DA"
-INK = "#17130F"
-ACCENT = "#E0472B"
-MUTED = "#8A8172"
-HAIRLINE = "#CFC6B4"
+PAPER = "#0B0908"
+INK = "#F2ECE1"
+ACCENT = "#FF4A2A"
+MUTED = "#9C9284"
+HAIRLINE = "#332D26"
 
 def resolve_font(candidates: list[str]) -> str:
     for path in candidates:
@@ -127,6 +127,21 @@ def bitmap_size(text: str, cell: int, tracking: int = 1) -> tuple[int, int]:
     return width, height
 
 
+def bitmap_svg_right(text: str, cell: int, right: float, y: float, color: str,
+                     tracking: int = 1, radius: float = 0.34) -> str:
+    width, _ = bitmap_size(text, cell, tracking)
+    return bitmap_svg(text, cell, right - width, y, color, tracking, radius)
+
+
+def grain(width: int, height: int, count: int, color: str, opacity: float, seed: int) -> str:
+    """Sparse noise, like ink sitting unevenly on the sheet."""
+    rng = np.random.default_rng(seed)
+    xs = rng.uniform(0, width, count)
+    ys = rng.uniform(0, height, count)
+    dots = "".join(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="1"/>' for x, y in zip(xs, ys))
+    return f'<g fill="{color}" opacity="{opacity}">{dots}</g>'
+
+
 # ---------------------------------------------------------------- raster masks
 
 
@@ -205,118 +220,150 @@ def write_svg(name: str, parts: list[str]) -> Path:
 
 
 def build_banner() -> Path:
-    width, height = 1280, 400
+    width, height = 1400, 500
     parts = svg_open(width, height, PAPER)
+    parts.append(grain(width, height, 1100, INK, 0.05, seed=11))
+    parts.append(f'<rect x="0" y="0" width="6" height="{height}" fill="{ACCENT}"/>')
 
-    # halftone sphere, with a dashed registration ring
-    sphere = radial_mask(340, 168, power=1.25)
-    grid = downsample((sphere * 255).astype(np.uint8), 8)
-    parts.append(f'<g fill="{ACCENT}">{dots(grid, 8, 900, 30, 4.6, gamma=0.85, floor=0.06)}</g>')
-    parts.append(
-        f'<circle cx="1076" cy="200" r="178" fill="none" stroke="{INK}" '
-        f'stroke-width="1.5" stroke-dasharray="2 7" opacity="0.75"/>'
-    )
-
-    parts.append(bitmap_svg("PORTFOLIO / 2026", 3, 64, 38, ACCENT, tracking=1))
+    parts.append(bitmap_svg("SPECIMEN / 01", 3, 64, 40, ACCENT))
+    parts.append(bitmap_svg_right("MMXXVI", 3, width - 64, 40, MUTED))
 
     for index, line in enumerate(("DEVANK", "GUPTA")):
-        mask = text_mask(line, SANS_BOLD, 132, tracking=2)
-        cell = 7
-        grid = downsample(mask, cell)
-        parts.append(f'<g fill="{INK}">{dots(grid, cell, 62, 86 + index * 108, 4.1, gamma=1.25, floor=0.1)}</g>')
+        cell = 9
+        grid = downsample(text_mask(line, SANS_BOLD, 170, tracking=3), cell)
+        y = 96 + index * 122
+        parts.append(
+            f'<g fill="{ACCENT}" opacity="0.78">'
+            f'{dots(grid, cell, 73, y + 7, 4.6, gamma=1.25, floor=0.1)}</g>'
+        )
+        parts.append(f'<g fill="{INK}">{dots(grid, cell, 68, y, 4.6, gamma=1.25, floor=0.1)}</g>')
 
-    parts.append(bitmap_svg("LOCAL-FIRST SOFTWARE / AGENTIC TOOLING", 3, 64, 336, INK, tracking=1))
+    parts.append(bitmap_svg("LOCAL-FIRST SOFTWARE / AGENTIC TOOLING", 3, 68, 378, INK))
 
-    for cx, cy in ((44, 40), (1236, 40), (44, 360), (1236, 360)):
-        parts.append(f'<circle cx="{cx}" cy="{cy}" r="2.2" fill="{MUTED}"/>')
+    parts.append(f'<line x1="900" y1="96" x2="900" y2="392" stroke="{HAIRLINE}" stroke-width="1"/>')
+    for tick in range(0, 297, 24):
+        parts.append(f'<line x1="893" y1="{96 + tick}" x2="900" y2="{96 + tick}" stroke="{HAIRLINE}" stroke-width="1"/>')
+    parts.append(bitmap_svg("45 LPI", 2, 916, 140, MUTED))
+    parts.append(bitmap_svg("2 INKS", 2, 916, 182, MUTED))
+    parts.append(bitmap_svg("NO.001", 2, 916, 224, MUTED))
+
+    size = 470
+    sphere = radial_mask(size, 232, power=1.2)
+    grid = downsample((sphere * 255).astype(np.uint8), 10)
+    parts.append(
+        f'<g fill="{ACCENT}">{dots(grid, 10, 1330 - size // 2, 322 - size // 2, 5.4, gamma=0.85, floor=0.05)}</g>'
+    )
+    parts.append(
+        f'<circle cx="1330" cy="322" r="250" fill="none" stroke="{INK}" stroke-width="1.2" '
+        f'stroke-dasharray="2 8" opacity="0.55"/>'
+    )
+
+    parts.append(f'<line x1="64" y1="430" x2="1000" y2="430" stroke="{HAIRLINE}" stroke-width="1"/>')
+    for x in range(64, 999, 44):
+        parts.append(f'<line x1="{x}" y1="430" x2="{x}" y2="438" stroke="{HAIRLINE}" stroke-width="1"/>')
+    parts.append(bitmap_svg("HALFTONE / DOT MATRIX", 2, 64, 452, MUTED))
 
     return write_svg("banner.svg", parts)
 
 
-def build_heading(text: str, name: str, cell: int = 5) -> Path:
-    label_width, label_height = bitmap_size(text, cell)
-    pad_left, pad_y = 46, 13
-    width, height = label_width + pad_left + 12, label_height + pad_y * 2
+def build_section(number: str, title: str, name: str, total: str = "04") -> Path:
+    width, height = 1400, 92
+    parts = svg_open(width, height, PAPER)
+    parts.append(bitmap_svg(number, 4, 64, 34, ACCENT))
+    parts.append(bitmap_svg(title, 4, 154, 34, INK))
 
-    parts = svg_open(width, height, None)
-    parts.append(f'<circle cx="16" cy="{height / 2:.1f}" r="7" fill="{ACCENT}"/>')
-    parts.append(
-        f'<circle cx="16" cy="{height / 2:.1f}" r="12" fill="none" stroke="{ACCENT}" '
-        f'stroke-width="1" opacity="0.4"/>'
-    )
-    parts.append(bitmap_svg(text, cell, pad_left, pad_y, INK))
-    return write_svg(name, parts)
-
-
-def build_divider(name: str = "divider.svg", width: int = 1200) -> Path:
-    height, cell = 24, 6
-    parts = svg_open(width, height, None)
-    circles = []
-    for index in range(width // cell):
-        t = index / max(width // cell - 1, 1)
-        radius = 1.0 + 2.1 * math.sin(math.pi * t) ** 0.55
-        circles.append(f'<circle cx="{index * cell + cell / 2:.1f}" cy="{height / 2:.1f}" r="{radius:.1f}"/>')
-    parts.append(f'<g fill="{MUTED}">{"".join(circles)}</g>')
+    title_width = bitmap_size(title, 4)[0]
+    x = 154 + title_width + 26
+    while x < width - 220:
+        parts.append(f'<circle cx="{x}" cy="48" r="1.8" fill="{HAIRLINE}"/>')
+        x += 11
+    parts.append(bitmap_svg_right(f"{number} / {total}", 2, width - 64, 41, MUTED))
     return write_svg(name, parts)
 
 
 def build_stats() -> Path:
     data = json.loads((ASSETS / "stats.json").read_text())
-    width, height = 1100, 300
+    width, height = 1400, 318
     parts = svg_open(width, height, PAPER)
+    parts.append(grain(width, height, 500, INK, 0.04, seed=5))
 
-    parts.append(bitmap_svg("GITHUB // SNAPSHOT", 3, 44, 30, ACCENT))
-    parts.append(f'<line x1="44" y1="76" x2="{width - 44}" y2="76" stroke="{HAIRLINE}" '
-                 f'stroke-width="2" stroke-dasharray="1 6"/>')
+    parts.append(bitmap_svg("GITHUB // SNAPSHOT", 3, 40, 28, ACCENT))
+    parts.append(bitmap_svg_right(f"SYNCED {data['updated']}", 2, width - 40, 36, MUTED))
+    parts.append(f'<line x1="40" y1="76" x2="{width - 40}" y2="76" stroke="{HAIRLINE}" stroke-width="1"/>')
 
     metrics = [
-        ("REPOS", str(data["repos"])),
-        ("STARS", str(data["stars"])),
-        ("FOLLOWERS", str(data["followers"])),
+        ("REPOS", data["repos"]),
+        ("STARS", data["stars"]),
+        ("FOLLOWERS", data["followers"]),
     ]
-    x = 44
+    x = 40
     for label, value in metrics:
-        parts.append(bitmap_svg(value, 8, x, 108, INK))
-        parts.append(bitmap_svg(label, 2, x + 2, 186, MUTED))
-        x += 170
+        parts.append(bitmap_svg(str(value), 10, x, 104, INK))
+        parts.append(bitmap_svg(label, 2, x + 2, 202, MUTED))
+        x += 260
 
-    divider_x = 566
-    parts.append(f'<line x1="{divider_x}" y1="104" x2="{divider_x}" y2="216" stroke="{HAIRLINE}" '
-                 f'stroke-width="2" stroke-dasharray="1 6"/>')
+    divider_x = 830
+    parts.append(
+        f'<line x1="{divider_x}" y1="98" x2="{divider_x}" y2="244" stroke="{HAIRLINE}" '
+        f'stroke-width="1" stroke-dasharray="2 7"/>'
+    )
 
-    parts.append(bitmap_svg("LANGUAGES", 3, 610, 104, ACCENT))
+    parts.append(bitmap_svg("LANGUAGES", 3, 870, 100, ACCENT))
     languages = data["languages"][:3]
-    y = 148
     total = sum(item["percent"] for item in languages) or 1
+    y = 146
     for index, item in enumerate(languages):
         share = round(item["percent"] / total * 100)
         color = INK if index == 0 else ACCENT if index == 1 else MUTED
-        parts.append(bitmap_svg(item["name"].upper(), 2, 610, y, color))
-        parts.append(bitmap_svg(f"{share}%", 2, 1032, y, MUTED))
+        parts.append(bitmap_svg(item["name"].upper(), 2, 870, y, color))
+        parts.append(bitmap_svg_right(f"{share}%", 2, width - 40, y, MUTED))
 
         filled = max(1, round(share / 100 * 30))
         for cell_index in range(30):
             radius = 3.0 if cell_index < filled else 1.1
-            opacity = 1 if cell_index < filled else 0.28
+            opacity = 1 if cell_index < filled else 0.24
             parts.append(
-                f'<circle cx="{750 + cell_index * 9:.1f}" cy="{y + 7:.1f}" r="{radius}" '
+                f'<circle cx="{1020 + cell_index * 9:.1f}" cy="{y + 7:.1f}" r="{radius}" '
                 f'fill="{color}" opacity="{opacity}"/>'
             )
-        y += 44
+        y += 46
 
-    parts.append(bitmap_svg(f"SYNCED {data['updated']}", 2, 44, 252, MUTED))
+    for index in range(0, width - 80, 12):
+        t = index / (width - 80)
+        radius = 1.2 + 2.2 * abs(math.sin(t * math.pi * 3))
+        parts.append(
+            f'<circle cx="{40 + index}" cy="292" r="{radius:.1f}" fill="{ACCENT}" opacity="0.55"/>'
+        )
+
     return write_svg("stats.svg", parts)
+
+
+def build_colophon() -> Path:
+    width, height = 1400, 124
+    parts = svg_open(width, height, PAPER)
+
+    parts.append(bitmap_svg("COLOPHON", 3, 40, 22, ACCENT))
+    parts.append(bitmap_svg_right("EDITION 2026 / NO. 001", 2, width - 40, 29, MUTED))
+    parts.append(f'<line x1="40" y1="58" x2="{width - 40}" y2="58" stroke="{HAIRLINE}" stroke-width="1"/>')
+
+    for index, color in enumerate((INK, ACCENT, MUTED)):
+        parts.append(f'<circle cx="{52 + index * 26}" cy="88" r="8" fill="{color}"/>')
+    parts.append(bitmap_svg("PALETTE", 2, 40, 104, MUTED))
+
+    parts.append(bitmap_svg("DEJAVU SANS CONDENSED / 5X7 DOT MATRIX / TWO INKS", 3, 200, 80, INK))
+
+    return write_svg("colophon.svg", parts)
 
 
 def build_all() -> None:
     ASSETS.mkdir(exist_ok=True)
     written = [
         build_banner(),
-        build_divider(),
-        build_heading("ABOUT", "head-about.svg"),
-        build_heading("STACK", "head-stack.svg"),
-        build_heading("TELEMETRY", "head-telemetry.svg"),
-        build_heading("CONTACT", "head-contact.svg"),
+        build_section("01", "ABOUT", "sec-about.svg"),
+        build_section("02", "STACK", "sec-stack.svg"),
+        build_section("03", "TELEMETRY", "sec-telemetry.svg"),
+        build_section("04", "CONTACT", "sec-contact.svg"),
+        build_colophon(),
     ]
     if (ASSETS / "stats.json").exists():
         written.append(build_stats())
@@ -335,8 +382,6 @@ def main() -> None:
         build_all()
     elif args.target == "banner":
         print(build_banner())
-    elif args.target == "divider":
-        print(build_divider())
     elif args.target == "stats":
         print(build_stats())
     else:
