@@ -6,11 +6,11 @@
   "languages": [
     {
       "name": "TypeScript",
-      "percent": 83
+      "percent": 71
     },
     {
       "name": "Python",
-      "percent": 17
+      "percent": 29
     }
   ],
   "updated": "2026-11-01"
